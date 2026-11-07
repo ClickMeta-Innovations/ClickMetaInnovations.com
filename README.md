@@ -1,1 +1,1 @@
-# ClickMetaDigital.github.io
+# ClickMeta.github.io
