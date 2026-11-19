@@ -94,10 +94,6 @@ a { color: inherit; }
 }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
 .brand { display: block; text-decoration: none; min-width: 0; }
-.nav { display: none; gap: 28px; font-weight: 500; font-size: 15px; }
-.nav a { text-decoration: none; color: var(--text); padding: 6px 0; border-bottom: 2px solid transparent; }
-.nav a:hover { color: var(--ink); border-bottom-color: var(--teal); }
-@media (min-width: 820px) { .nav { display: flex; } }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -224,6 +220,86 @@ a { color: inherit; }
 @media (min-width: 900px) { .copyright { width: auto; } }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---- Businesses / Products additions ---- */
+.nav { display: none; gap: 24px; font-weight: 500; font-size: 15px; align-items: center; }
+.nav > a, .nav-btn {
+  text-decoration: none; color: var(--text); padding: 6px 0; border: 0; border-bottom: 2px solid transparent;
+  background: none; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav > a:hover, .nav-btn:hover, .has-menu.open > .nav-btn { color: var(--ink); border-bottom-color: var(--teal); }
+.nav-btn::after {
+  content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px); transition: transform .15s ease;
+}
+.has-menu.open > .nav-btn::after { transform: rotate(225deg) translate(-1px, -1px); }
+.site-header .wrap { position: relative; }
+.has-menu.relative { position: relative; }
+.menu {
+  display: none; position: absolute; top: calc(100% + 1px); z-index: 25;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 18px 40px -12px rgba(3, 50, 94, 0.28); padding: 18px 20px; font-size: 14.5px; font-weight: 400;
+}
+.has-menu.open > .menu { display: block; }
+.menu a { color: var(--text); text-decoration: none; display: block; padding: 5px 0; border-bottom: 0; line-height: 1.4; }
+.menu a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--teal); text-underline-offset: 4px; }
+.menu-biz { left: -20px; min-width: 280px; }
+.menu-biz a { padding: 8px 0; font-weight: 500; }
+.menu-biz small { display: block; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: .04em; }
+.menu-mega { left: 0; right: 0; display: none; grid-template-columns: 1.15fr 1fr 1fr; gap: 12px 32px; padding: 24px 28px; max-height: calc(100vh - 110px); overflow-y: auto; }
+.has-menu.open > .menu-mega { display: grid; }
+.mega-col h3 { font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+.mega-col h3 a { color: var(--teal-ink); padding: 0; }
+.mega-col .grid2 { columns: 2; column-gap: 20px; }
+.mega-col .grid2 a { break-inside: avoid; }
+.mega-col .sub { padding-left: 14px; color: var(--muted); font-size: 13.5px; }
+@media (min-width: 1000px) { .nav { display: flex; } .menu-btn { display: none !important; } }
+
+.header-actions { display: flex; align-items: center; gap: 10px; flex: none; }
+.menu-btn {
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; line-height: 1; color: var(--ink);
+  background: transparent; border: 0; border-radius: 10px; padding: 11px 14px; cursor: pointer;
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+.menu-btn:hover { box-shadow: inset 0 0 0 2px var(--teal); }
+@media (max-width: 520px) { .header-actions .header-cta { display: none; } }
+
+.mobile-menu {
+  position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line);
+  max-height: calc(100vh - 84px); overflow-y: auto; box-shadow: 0 18px 30px -18px rgba(3, 50, 94, 0.35);
+}
+.mobile-menu .wrap { padding-block: 8px 20px; display: block; }
+.mobile-menu > .wrap > a:not(.btn), .mobile-menu summary {
+  display: block; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 500; text-decoration: none; cursor: pointer; list-style: none;
+}
+.mobile-menu summary::-webkit-details-marker { display: none; }
+.mobile-menu summary { display: flex; justify-content: space-between; align-items: center; }
+.mobile-menu summary::after { content: "+"; font-family: var(--font-mono); color: var(--teal-ink); font-size: 18px; }
+.mobile-menu details[open] summary::after { content: "\2212"; }
+.mobile-menu details ul { list-style: none; margin: 0; padding: 4px 0 10px 14px; border-bottom: 1px solid var(--line); }
+.mobile-menu details li a { display: block; padding: 8px 0; color: var(--text); text-decoration: none; font-size: 15px; }
+.mobile-menu .btn { margin-top: 16px; }
+@media (min-width: 1000px) { .mobile-menu { display: none !important; } }
+
+.pgroups { display: grid; gap: 64px; }
+.pgroup-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 22px; }
+.pgroup-head h3 { font-size: clamp(1.4rem, 3.4vw, 1.8rem); font-weight: 600; }
+.pgroup-head .eyebrow { order: 2; }
+.pgrid { display: grid; grid-template-columns: 1fr; gap: 28px 32px; }
+@media (min-width: 640px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 980px) { .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pcat { border-top: 1px solid var(--line); padding-top: 14px; min-width: 0; }
+.pcat h4 { font-family: var(--font-display); color: var(--ink); font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0; }
+.pcat ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+.pcat li { position: relative; padding-left: 20px; }
+.pcat li::before {
+  content: ""; position: absolute; left: 0; top: 0.5em; width: 9px; height: 9px; border-radius: 50%;
+  border: 2px solid var(--teal); background: var(--bg);
+}
+.pcat li ul { margin-top: 6px; }
+.pcat li li::before { border-color: var(--blue); }
+.more { font-family: var(--font-mono); font-size: 13px; color: var(--teal-ink); text-decoration: none; align-self: start; }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
 </style>
 
 <header class="site-header">
@@ -233,12 +309,90 @@ a { color: inherit; }
       <div class="logo logo-d" role="img" aria-label="ClickMeta Innovations"></div>
     </a>
     <nav class="nav" aria-label="Main">
+      <div class="has-menu relative">
+        <button class="nav-btn" type="button" aria-expanded="false" aria-controls="menu-businesses">Businesses</button>
+        <div class="menu menu-biz" id="menu-businesses">
+          <a href="#b-technologies">ClickMeta Technologies<small>Technologies</small></a>
+          <a href="#b-ai-automations">ClickMeta Automation<small>AI Automations</small></a>
+          <a href="#b-solutions">ClickMeta Solutions<small>Solutions</small></a>
+        </div>
+      </div>
+      <div class="has-menu">
+        <button class="nav-btn" type="button" aria-expanded="false" aria-controls="menu-products">Products</button>
+        <div class="menu menu-mega" id="menu-products">
+          <div class="mega-col">
+            <h3><a href="#technologies">Technologies</a></h3>
+            <div class="grid2">
+            <a href="#t-laptop">Laptop</a>
+            <a href="#t-desktop">Desktop</a>
+            <a href="#t-printer">Printer</a>
+            <a href="#t-server">Server</a>
+            <a href="#t-data-center">Data Center</a>
+            <a href="#t-network">Network</a>
+            <a href="#t-ups">UPS</a>
+            <a href="#t-cctv">CCTV</a>
+            <a href="#t-av-conference">Audio Video Conference</a>
+            <a href="#t-pa-system">PA System</a>
+            <a href="#t-pbx">PBX</a>
+            <a href="#t-access-control">Access Control</a>
+            <a href="#t-turnstile">Turnstile Gates</a>
+            <a href="#t-interactive-display">Interactive Display</a>
+            </div>
+          </div>
+          <div class="mega-col">
+            <h3><a href="#ai-automations">AI Automations</a></h3>
+            <a href="#ai-industrial">Industrial AI Automation</a>
+            <a href="#ai-bpia">Business Process Intelligence and Automation (BPIA)</a>
+            <a href="#ai-rpa">Robotic Process Automation (RPA)</a>
+            <a href="#ai-facebook">Facebook Page Automation for Online Shops</a>
+            <a href="#ai-whatsapp">WhatsApp Automation for Online Shops</a>
+          </div>
+          <div class="mega-col">
+            <h3><a href="#solutions">Solutions</a></h3>
+            <a href="#s-managed">Managed IT Service (Remote)</a>
+            <a class="sub" href="#s-managed">IT Help Desk (Remote)</a>
+            <a class="sub" href="#s-managed">Annual Maintenance Contract</a>
+            <a href="#s-attendance">Employee Attendance System</a>
+            <a href="#s-meeting">Meeting Room Booking System</a>
+            <a href="#s-helpdesk">IT Helpdesk Ticketing System</a>
+            <a class="sub" href="#s-helpdesk">Freshdesk</a>
+          </div>
+        </div>
+      </div>
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn header-cta" href="#contact">Start a project</a>
+    <div class="header-actions">
+      <a class="btn header-cta" href="#contact">Start a project</a>
+      <button class="menu-btn" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="wrap">
+      <details>
+        <summary>Businesses</summary>
+        <ul>
+          <li><a href="#b-technologies">ClickMeta Technologies</a></li>
+          <li><a href="#b-ai-automations">ClickMeta Automation</a></li>
+          <li><a href="#b-solutions">ClickMeta Solutions</a></li>
+        </ul>
+      </details>
+      <details>
+        <summary>Products</summary>
+        <ul>
+          <li><a href="#technologies">Technologies</a></li>
+          <li><a href="#ai-automations">AI Automations</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+        </ul>
+      </details>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="#contact">Start a project</a>
+    </div>
   </div>
 </header>
 
@@ -257,6 +411,189 @@ a { color: inherit; }
       <div class="hero-visual" id="clickzone" aria-hidden="true">
         <div class="icon icon-l"></div>
         <div class="icon icon-d"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="businesses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Businesses</p>
+        <h2>Three businesses, one team</h2>
+        <p>Each business covers one product line, so you deal with specialists for hardware, automation and managed services.</p>
+      </div>
+      <ul class="services">
+        <li class="service" id="b-technologies">
+          <h3>ClickMeta Technologies</h3>
+          <p>IT and security hardware for offices and data centers: computers, printers, servers, networking, CCTV, access control and conferencing.</p>
+          <a class="more" href="#technologies">See Technologies</a>
+        </li>
+        <li class="service" id="b-ai-automations">
+          <h3>ClickMeta Automation</h3>
+          <p>AI and process automation for factories, back offices and online shops.</p>
+          <a class="more" href="#ai-automations">See AI Automations</a>
+        </li>
+        <li class="service" id="b-solutions">
+          <h3>ClickMeta Solutions</h3>
+          <p>Managed IT services, maintenance contracts and business systems for attendance, meeting rooms and IT help desks.</p>
+          <a class="more" href="#solutions">See Solutions</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Products</p>
+        <h2>Products and solutions</h2>
+        <p>Browse by product line: Technologies, AI Automations and Solutions.</p>
+      </div>
+      <div class="pgroups">
+        <div id="technologies">
+          <div class="pgroup-head"><h3>Technologies</h3><span class="eyebrow">ClickMeta Technologies</span></div>
+          <div class="pgrid">
+          <article class="pcat" id="t-laptop">
+            <h4>Laptop</h4>
+            <ul>
+              <li>Laptop Accessories</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-desktop">
+            <h4>Desktop</h4>
+            <ul>
+              <li>Desktop Accessories</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-printer">
+            <h4>Printer</h4>
+            <ul>
+              <li>HP</li>
+              <li>Canon</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-server">
+            <h4>Server</h4>
+            <ul>
+              <li>HP</li>
+              <li>Dell</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-data-center">
+            <h4>Data Center</h4>
+            <ul>
+              <li>Data Center Structured Cabling</li>
+              <li>Data Center Raised Floors</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-network">
+            <h4>Network</h4>
+            <ul>
+              <li>Network Switch and Router</li>
+              <li>Network Rack, Cabinets</li>
+              <li>WiFi AP</li>
+              <li>Network Cable</li>
+              <li>Cable Tray, Cable Ladder</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-ups">
+            <h4>UPS</h4>
+            <ul>
+              <li>Online UPS</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-cctv">
+            <h4>CCTV</h4>
+            <ul>
+              <li>IP Camera</li>
+              <li>NVR</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-av-conference">
+            <h4>Audio Video Conference</h4>
+            <ul>
+              <li>Jabra</li>
+              <li>GrandStream</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-pa-system">
+            <h4>PA System</h4>
+            <ul>
+              <li>PA System / Sound System</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-pbx">
+            <h4>PBX</h4>
+            <ul>
+              <li>IP PBX Server Solution</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-access-control">
+            <h4>Access Control</h4>
+            <ul>
+              <li>Face ID Devices</li>
+              <li>Biometric Devices</li>
+              <li>Proximity Devices</li>
+            </ul>
+          </article>
+          <article class="pcat" id="t-turnstile">
+            <h4>Turnstile Gates</h4>
+          </article>
+          <article class="pcat" id="t-interactive-display">
+            <h4>Interactive Display</h4>
+          </article>
+          </div>
+        </div>
+        <div id="ai-automations">
+          <div class="pgroup-head"><h3>AI Automations</h3><span class="eyebrow">ClickMeta Automation</span></div>
+          <div class="pgrid">
+          <article class="pcat" id="ai-industrial">
+            <h4>Industrial AI Automation</h4>
+          </article>
+          <article class="pcat" id="ai-bpia">
+            <h4>Business Process Intelligence and Automation (BPIA)</h4>
+          </article>
+          <article class="pcat" id="ai-rpa">
+            <h4>Robotic Process Automation (RPA)</h4>
+          </article>
+          <article class="pcat" id="ai-facebook">
+            <h4>Facebook Page Automation for Online Shops</h4>
+          </article>
+          <article class="pcat" id="ai-whatsapp">
+            <h4>WhatsApp Automation for Online Shops</h4>
+          </article>
+          </div>
+        </div>
+        <div id="solutions">
+          <div class="pgroup-head"><h3>Solutions</h3><span class="eyebrow">ClickMeta Solutions</span></div>
+          <div class="pgrid">
+          <article class="pcat" id="s-managed">
+            <h4>Managed IT Service (Remote)</h4>
+            <ul>
+              <li>IT Help Desk (Remote)</li>
+              <li>Annual Maintenance Contract
+                <ul>
+                  <li>Rented Scanning &amp; Printing</li>
+                  <li>Infrastructure Management and Monitoring</li>
+                  <li>UPS Servicing &amp; Maintenance</li>
+                </ul>
+              </li>
+            </ul>
+          </article>
+          <article class="pcat" id="s-attendance">
+            <h4>Employee Attendance System</h4>
+          </article>
+          <article class="pcat" id="s-meeting">
+            <h4>Meeting Room Booking System</h4>
+          </article>
+          <article class="pcat" id="s-helpdesk">
+            <h4>IT Helpdesk Ticketing System</h4>
+            <ul>
+              <li>Freshdesk</li>
+            </ul>
+          </article>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -354,6 +691,8 @@ a { color: inherit; }
       <div class="logo logo-d" role="img" aria-label="ClickMeta Innovations"></div>
     </div>
     <nav class="foot-nav" aria-label="Footer">
+      <a href="#businesses">Businesses</a>
+      <a href="#products">Products</a>
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#about">About</a>
@@ -399,6 +738,62 @@ a { color: inherit; }
         navigator.clipboard.writeText(text).then(done, fail);
       } else { fail(); }
     } catch (err) { fail(); }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var items = [].slice.call(document.querySelectorAll('.has-menu'));
+  var timer = null;
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+  function closeAll(except) {
+    items.forEach(function (it) {
+      if (it !== except) {
+        it.classList.remove('open');
+        var b = it.querySelector('.nav-btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+  function openItem(it) {
+    clearTimeout(timer);
+    closeAll(it);
+    it.classList.add('open');
+    it.querySelector('.nav-btn').setAttribute('aria-expanded', 'true');
+  }
+  items.forEach(function (it) {
+    var btn = it.querySelector('.nav-btn');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (it.classList.contains('open')) { if (!canHover) closeAll(); } else { openItem(it); }
+    });
+    if (canHover) {
+      it.addEventListener('mouseenter', function () { openItem(it); });
+      it.addEventListener('mouseleave', function () { timer = setTimeout(function () { closeAll(); }, 200); });
+    }
+    [].slice.call(it.querySelectorAll('.menu a')).forEach(function (a) {
+      a.addEventListener('click', function () { closeAll(); });
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('.has-menu')) closeAll();
+  });
+
+  // mobile menu
+  var toggle = document.getElementById('menu-toggle');
+  var panel = document.getElementById('mobile-menu');
+  function setMobile(open) {
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.textContent = open ? 'Close' : 'Menu';
+  }
+  toggle.addEventListener('click', function () { setMobile(panel.hidden); });
+  [].slice.call(panel.querySelectorAll('a')).forEach(function (a) {
+    a.addEventListener('click', function () { setMobile(false); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeAll(); setMobile(false); }
   });
 })();
 </script>
