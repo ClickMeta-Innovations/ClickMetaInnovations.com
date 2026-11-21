@@ -1,6 +1,12 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ClickMeta Innovations designs and builds websites, apps and AI tools. Businesses: ClickMeta Technologies, ClickMeta Automation and ClickMeta Solutions.">
+<link rel="icon" href="favicon.ico">
+<style>:root{color-scheme:light}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>ClickMeta Innovations</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -300,8 +306,11 @@ a { color: inherit; }
 .pcat li li::before { border-color: var(--blue); }
 .more { font-family: var(--font-mono); font-size: 13px; color: var(--teal-ink); text-decoration: none; align-self: start; }
 .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+.morewrap { display: grid; gap: 6px; align-self: start; }
 </style>
 
+</head>
+<body>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="ClickMeta Innovations, home">
@@ -313,7 +322,7 @@ a { color: inherit; }
         <button class="nav-btn" type="button" aria-expanded="false" aria-controls="menu-businesses">Businesses</button>
         <div class="menu menu-biz" id="menu-businesses">
           <a href="#b-technologies">ClickMeta Technologies<small>Technologies</small></a>
-          <a href="#b-ai-automations">ClickMeta Automation<small>AI Automations</small></a>
+          <a href="automations.html">ClickMeta Automation<small>AI Automations</small></a>
           <a href="#b-solutions">ClickMeta Solutions<small>Solutions</small></a>
         </div>
       </div>
@@ -375,7 +384,7 @@ a { color: inherit; }
         <summary>Businesses</summary>
         <ul>
           <li><a href="#b-technologies">ClickMeta Technologies</a></li>
-          <li><a href="#b-ai-automations">ClickMeta Automation</a></li>
+          <li><a href="automations.html">ClickMeta Automation</a></li>
           <li><a href="#b-solutions">ClickMeta Solutions</a></li>
         </ul>
       </details>
@@ -431,7 +440,7 @@ a { color: inherit; }
         <li class="service" id="b-ai-automations">
           <h3>ClickMeta Automation</h3>
           <p>AI and process automation for factories, back offices and online shops.</p>
-          <a class="more" href="#ai-automations">See AI Automations</a>
+          <span class="morewrap"><a class="more" href="#ai-automations">See AI Automations</a><a class="more" href="automations.html">View portfolio</a></span>
         </li>
         <li class="service" id="b-solutions">
           <h3>ClickMeta Solutions</h3>
@@ -797,5 +806,5 @@ a { color: inherit; }
   });
 })();
 </script>
-
-</body></html>
+</body>
+</html>
