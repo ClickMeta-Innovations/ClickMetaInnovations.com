@@ -219,11 +219,29 @@ h1,h2,h3,h4{font-family:Poppins,"Segoe UI",sans-serif;color:var(--navy);line-hei
   box-shadow:0 4px 14px rgba(3,50,94,.15)}
 .backbar:hover{border-color:#01B5B4}
 @media print{.backbar{display:none}}
+
+/* contact bar (screen only) */
+.contactbar{position:fixed;top:12px;right:12px;z-index:50;display:flex;align-items:center;gap:14px;background:#fff;
+  border:1px solid #D6E1EB;border-radius:999px;padding:5px 6px 5px 16px;font:500 12.5px Inter,"Segoe UI",sans-serif;color:#03325E;
+  box-shadow:0 4px 14px rgba(3,50,94,.15)}
+.contactbar a{color:#03325E;text-decoration:none}
+.contactbar a.t:hover{color:#00797A}
+.contactbar .ico{display:flex;gap:5px}
+.contactbar .ico a{width:28px;height:28px;border-radius:50%;background:#E8F7F7;color:#00797A;display:grid;place-items:center}
+.contactbar .ico a:hover{background:#01B5B4;color:#03325E}
+.contactbar svg{width:14px;height:14px;fill:currentColor}
+@media (max-width:760px){.contactbar .em{display:none}}
+@media print{.contactbar{display:none}}
+/* social icons on the back cover */
+.bc-ico{display:flex;gap:2mm;justify-content:flex-end;margin-top:2.6mm}
+.bc-ico a{width:7.5mm;height:7.5mm;border-radius:50%;background:#03325E;color:#fff;display:grid;place-items:center;text-decoration:none}
+.bc-ico svg{width:3.8mm;height:3.8mm;fill:currentColor}
 .gl.tight td{padding:1.7mm 2mm}.gl.tight tr.grp td{padding:3.2mm 2mm 1mm}
 </style>
 </head>
 <body>
 <a class="backbar" href="index.html">&larr; ClickMeta Innovations</a>
+<div class="contactbar"><a class="t" href="tel:+8801531720561">+8801531-720561</a><a class="t em" href="mailto:info@clickmetainnovations.com">info@clickmetainnovations.com</a><span class="ico"><a href="https://www.facebook.com/ClickMetaInnovations/" target="_blank" rel="noopener" aria-label="ClickMeta Innovations on Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.instagram.com/clickmetainnovations" target="_blank" rel="noopener" aria-label="ClickMeta Innovations on Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.5" cy="6.5" r="1.4"/></svg></a><a href="https://wa.me/8801531720561" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></span></div>
 
 <!-- =============== COVER =============== -->
 <section class="page dark cover">
@@ -240,7 +258,7 @@ h1,h2,h3,h4{font-family:Poppins,"Segoe UI",sans-serif;color:var(--navy);line-hei
     <div class="ct"><div class="k">04</div><h4>Meetings and Communication</h4><p>Conferencing, PA systems, IP PBX and interactive displays.</p></div>
   </div>
   <div style="height:12mm"></div>
-  <div class="cfoot"><span><b>clickmetainnovations.com</b></span><span>info@clickmetainnovations.com</span></div>
+  <div class="cfoot"><span><b>clickmetainnovations.com</b></span><span>info@clickmetainnovations.com · +8801531-720561</span></div>
 </section>
 
 <!-- =============== AT A GLANCE =============== -->
@@ -379,7 +397,7 @@ h1,h2,h3,h4{font-family:Poppins,"Segoe UI",sans-serif;color:var(--navy);line-hei
   <div class="eyebrow mt3">After installation</div>
   <h3 style="font-size:15pt;margin:1.4mm 0 4mm">Keep it running with ClickMeta Solutions</h3>
   <div class="feat" style="grid-template-columns:repeat(3,1fr)">
-    <div class="fi"><div><b>Managed IT Service (Remote)</b><span>Day-to-day IT support delivered remotely</span></div></div>
+    <div class="fi"><div><b>Managed IT Service</b><span>Day-to-day IT support delivered remotely</span></div></div>
     <div class="fi"><div><b>IT Help Desk (Remote)</b><span>One place for your team to ask for help</span></div></div>
     <div class="fi"><div><b>Annual Maintenance Contract</b><span>Planned upkeep for the equipment we supply</span></div></div>
     <div class="fi"><div><b>Rented Scanning and Printing</b><span>Printing and scanning without buying printers</span></div></div>
@@ -423,8 +441,9 @@ h1,h2,h3,h4{font-family:Poppins,"Segoe UI",sans-serif;color:var(--navy);line-hei
   <div class="grow"></div>
   <div style="background:var(--teal);border-radius:4mm;padding:7mm 8mm;display:flex;justify-content:space-between;align-items:center;margin-bottom:10mm">
     <div><div style="font:600 7.4pt 'IBM Plex Mono';letter-spacing:.14em;color:#03325E;text-transform:uppercase">Talk to us</div>
-      <div style="font:600 17pt Poppins;color:#fff;margin-top:1mm">info@clickmetainnovations.com</div></div>
-    <div style="font:600 11pt Poppins;color:#03325E;text-align:right">clickmetainnovations.com</div>
+      <div style="font:600 17pt Poppins;color:#fff;margin-top:1mm">info@clickmetainnovations.com</div>
+      <div style="font:600 12pt Poppins;color:#03325E;margin-top:1.4mm">+8801531-720561</div></div>
+    <div style="font:600 11pt Poppins;color:#03325E;text-align:right">clickmetainnovations.com<div class="bc-ico"><a href="https://www.facebook.com/ClickMetaInnovations/" target="_blank" rel="noopener" aria-label="ClickMeta Innovations on Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.instagram.com/clickmetainnovations" target="_blank" rel="noopener" aria-label="ClickMeta Innovations on Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.5" cy="6.5" r="1.4"/></svg></a><a href="https://wa.me/8801531720561" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div></div>
   </div>
   <div class="cfoot"><span><b>ClickMeta Innovations</b> · Web · Apps · AI</span><span>Technologies Portfolio 2026</span></div>
 </section>
