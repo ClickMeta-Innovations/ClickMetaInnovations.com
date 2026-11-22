@@ -329,10 +329,67 @@ a { color: inherit; }
   box-shadow: inset 0 0 0 1.5px rgba(234, 243, 251, .32); transition: background-color .15s ease, color .15s ease; }
 .contact-social a:hover { background: var(--teal); color: #03325E; box-shadow: none; }
 .contact-social svg { width: 19px; height: 19px; fill: currentColor; }
+
+/* ---- chat assistant ---- */
+.chat-fab {
+  position: fixed; z-index: 40;
+  right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 20px 0 16px; border: 0; border-radius: 999px;
+  background: var(--teal); color: #03325E; font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer;
+  box-shadow: 0 10px 28px -8px rgba(3, 50, 94, 0.55); transition: transform .15s ease;
+}
+.chat-fab:hover { transform: translateY(-2px); }
+.chat-fab svg { width: 24px; height: 24px; fill: currentColor; flex: none; }
+.chat-fab[aria-expanded="true"] { display: none; }
+.chat-panel[hidden] { display: none; }
+.chat-panel {
+  position: fixed; z-index: 41; display: flex; flex-direction: column; overflow: hidden;
+  right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: min(390px, calc(100vw - 32px)); height: min(580px, calc(100vh - 32px - env(safe-area-inset-bottom, 0px)));
+  background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 24px 60px -16px rgba(3, 50, 94, 0.5);
+}
+.chat-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; background: var(--band-bg); color: var(--band-fg); }
+.chat-title { display: grid; gap: 2px; min-width: 0; }
+.chat-title b { font-family: var(--font-display); font-weight: 600; font-size: 16px; line-height: 1.2; }
+.chat-title small { font-size: 12.5px; color: var(--band-muted); line-height: 1.3; }
+.chat-close { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(234, 243, 251, .14); color: var(--band-fg); cursor: pointer; display: grid; place-items: center; }
+.chat-close:hover { background: rgba(234, 243, 251, .28); }
+.chat-close svg { width: 16px; height: 16px; }
+.chat-log { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); overscroll-behavior: contain; }
+.msg { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: 14.5px; line-height: 1.5; overflow-wrap: anywhere; }
+.msg p + p, .msg p + ul, .msg ul + p { margin-top: 8px; }
+.msg ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; }
+.msg.bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); color: var(--text); border-bottom-left-radius: 4px; }
+.msg.bot a { color: var(--teal-ink); text-decoration: underline; text-underline-offset: 3px; }
+.msg.user { align-self: flex-end; background: var(--btn-bg); color: var(--btn-fg); border-bottom-right-radius: 4px; }
+.msg .handoff { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.msg .handoff a { text-decoration: none; font-weight: 600; font-size: 13.5px; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--teal); color: var(--ink); }
+.msg .handoff a:hover { background: var(--teal); color: #03325E; }
+.typing { display: inline-flex; gap: 4px; align-items: center; padding: 14px 14px; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); display: block; animation: blip 1s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes blip { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .typing i { animation: none; opacity: .6; } .chat-fab { transition: none; } }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 7px; padding: 10px 16px 4px; background: var(--bg); border-top: 1px solid var(--line); max-height: 112px; overflow-y: auto; }
+.chat-chips:empty { display: none; }
+.chat-chips button { font: inherit; font-size: 13.5px; padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chat-chips button:hover { border-color: var(--teal); }
+.chat-form { display: flex; gap: 8px; padding: 10px 12px; background: var(--bg); }
+.chat-form input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 11px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--text); }
+.chat-form input::placeholder { color: var(--muted); }
+.chat-form input:focus-visible { outline: 3px solid var(--blue); outline-offset: 1px; }
+.chat-form button { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--btn-bg); color: var(--btn-fg); cursor: pointer; display: grid; place-items: center; }
+.chat-form button:hover { background: var(--btn-hover); }
+.chat-form button svg { width: 18px; height: 18px; fill: currentColor; }
+.chat-foot { padding: 8px 16px 12px; font-size: 12.5px; color: var(--muted); background: var(--bg); text-align: center; }
+.chat-foot a { color: var(--teal-ink); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 520px) {
+  .chat-fab span { display: none; } .chat-fab { width: 56px; padding: 0; justify-content: center; }
+  .chat-panel { left: calc(8px + env(safe-area-inset-left, 0px)); right: calc(8px + env(safe-area-inset-right, 0px)); bottom: calc(8px + env(safe-area-inset-bottom, 0px)); width: auto; height: min(640px, calc(100vh - 16px - env(safe-area-inset-bottom, 0px))); }
+}
 </style>
 
-</head>
-<body>
 <div class="topbar">
   <div class="wrap">
     <a class="tb-item tb-phone" href="tel:+8801531720561"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>+8801531-720561</span></a>
@@ -781,6 +838,26 @@ a { color: inherit; }
 })();
 </script>
 
+<div class="chat" id="chat">
+  <button class="chat-fab" id="chat-fab" type="button" aria-expanded="false" aria-controls="chat-panel">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2.5h2V5h-2z"/><circle cx="12" cy="2.4" r="1.4"/><path fill-rule="evenodd" d="M7 5.5h10a3.5 3.5 0 0 1 3.5 3.5v7a3.5 3.5 0 0 1-3.5 3.5H7A3.5 3.5 0 0 1 3.5 16V9A3.5 3.5 0 0 1 7 5.5zM8.700 9.200a1.600 1.600 0 1 0 0 3.200 1.600 1.600 0 0 0 0-3.200zm6.600 0a1.600 1.600 0 1 0 0 3.200 1.600 1.600 0 0 0 0-3.200zM8.500 15v1.400h7V15z"/><rect x="1" y="10" width="1.800" height="4.500" rx=".9"/><rect x="21.200" y="10" width="1.800" height="4.500" rx=".9"/></svg>
+    <span>Ask us</span>
+  </button>
+  <section class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat with ClickMeta Innovations" hidden>
+    <div class="chat-head">
+      <div class="chat-title"><b>ClickMeta Assistant</b><small>Ask about our services and products</small></div>
+      <button class="chat-close" id="chat-close" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+    <div class="chat-chips" id="chat-chips"></div>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <input id="chat-input" name="question" type="text" placeholder="Type your question" aria-label="Your question" maxlength="300">
+      <button type="submit" aria-label="Send question"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.400 20.400 21 12 3.400 3.600l-.1 6.500L15 12 3.300 13.900z"/></svg></button>
+    </form>
+    <div class="chat-foot">Prefer a person? <a href="https://wa.me/8801531720561" target="_blank" rel="noopener">WhatsApp</a> &middot; <a href="mailto:info@clickmetainnovations.com">Email</a> &middot; <a href="tel:+8801531720561">Call</a></div>
+  </section>
+</div>
+
 <script>
 (function () {
   var items = [].slice.call(document.querySelectorAll('.has-menu'));
@@ -836,5 +913,210 @@ a { color: inherit; }
   });
 })();
 </script>
-</body>
-</html>
+
+<script>
+(function () {
+  var WA = 'https://wa.me/8801531720561';
+  var EMAIL = 'info@clickmetainnovations.com';
+  var PHONE = '+8801531-720561';
+  var TEL = '+8801531720561';
+
+  var fab = document.getElementById('chat-fab');
+  var panel = document.getElementById('chat-panel');
+  var closeBtn = document.getElementById('chat-close');
+  var log = document.getElementById('chat-log');
+  var chipsBox = document.getElementById('chat-chips');
+  var form = document.getElementById('chat-form');
+  var input = document.getElementById('chat-input');
+  var started = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var DEFAULT_CHIPS = ['Our businesses', 'Products', 'Services', 'Request a quote', 'Contact us'];
+
+  function handoff(q) {
+    var text = 'Hello ClickMeta, I have a question' + (q ? ': ' + q : '.');
+    return '<div class="handoff"><a href="' + WA + '?text=' + encodeURIComponent(text) + '" target="_blank" rel="noopener">WhatsApp us</a>' +
+      '<a href="mailto:' + EMAIL + '?subject=' + encodeURIComponent('Question for ClickMeta Innovations') + '&body=' + encodeURIComponent(q || '') + '">Email us</a>' +
+      '<a href="tel:' + TEL + '">Call ' + PHONE + '</a></div>';
+  }
+
+  // Knowledge base. k = keywords (multi-word entries are phrases). a = answer HTML. c = follow-up chips. h = show person handoff.
+  var KB = [
+    { id: 'greet', k: ['hi', 'hello', 'hey', 'salam', 'assalamualaikum', 'good morning', 'good evening'], short: true,
+      a: '<p>Hello! I can answer questions about ClickMeta Innovations: our businesses, products and services. Tap a topic or type your question.</p>', c: DEFAULT_CHIPS },
+    { id: 'thanks', k: ['thanks', 'thank', 'thankyou', 'ok thanks'], short: true,
+      a: '<p>You are welcome! Ask me anything else, or reach our team directly any time.</p>', h: true },
+    { id: 'about', k: ['about', 'who are you', 'what is clickmeta', 'what do you do', 'company', 'clickmeta'],
+      a: '<p>ClickMeta Innovations designs and builds websites, apps and AI tools, and supplies technology and IT services through three businesses: ClickMeta Technologies, ClickMeta Automation and ClickMeta Solutions.</p>', c: ['Our businesses', 'Services', 'Products'] },
+    { id: 'businesses', k: ['businesses', 'business', 'divisions', 'brands', 'ventures'],
+      a: '<p>We run three businesses:</p><ul><li><b>ClickMeta Technologies</b>: hardware and IT infrastructure</li><li><b>ClickMeta Automation</b>: AI and process automation</li><li><b>ClickMeta Solutions</b>: managed IT services and business systems</li></ul><p>See the <a href="technologies.html">Technologies portfolio</a> or the <a href="automations.html">Solutions portfolio</a>.</p>', c: ['Technologies', 'AI Automations', 'Solutions'] },
+    { id: 'products', k: ['products', 'product', 'catalog', 'catalogue', 'what do you sell', 'what do you offer', 'offer'],
+      a: '<p>Our products come in three lines: <a href="#technologies">Technologies</a>, <a href="#ai-automations">AI Automations</a> and <a href="#solutions">Solutions</a>. Which one would you like to hear about?</p>', c: ['Technologies', 'AI Automations', 'Solutions'] },
+
+    // Technologies
+    { id: 'tech', k: ['technologies', 'technology', 'hardware', 'it equipment', 'equipment', 'devices'],
+      a: '<p>ClickMeta Technologies supplies 14 categories: Laptop, Desktop, Printer, Server, Data Center, Network, UPS, CCTV, Audio Video Conference, PA System, PBX, Access Control, Turnstile Gates and Interactive Display.</p><p>See <a href="#technologies">Products: Technologies</a> or the <a href="technologies.html">Technologies portfolio</a>.</p>', c: ['Network', 'CCTV', 'Access control', 'Printers'] },
+    { id: 't-laptop', k: ['laptop', 'laptops', 'notebook'], a: '<p>We supply laptops and laptop accessories for offices, field and remote teams. <a href="#t-laptop">See details</a>.</p>', c: ['Desktop', 'Printers'] },
+    { id: 't-desktop', k: ['desktop', 'desktops', 'pc', 'computer', 'computers'], a: '<p>We supply desktop computers and desktop accessories for offices, branches and labs. <a href="#t-desktop">See details</a>.</p>', c: ['Laptop', 'Servers'] },
+    { id: 't-printer', k: ['printer', 'printers', 'printing', 'canon', 'hp', 'scanner', 'scanning', 'rented scanning'], a: '<p>We supply HP and Canon printers. Rented Scanning and Printing is also available under ClickMeta Solutions. <a href="#t-printer">See details</a>.</p>', c: ['Annual maintenance', 'Servers'] },
+    { id: 't-server', k: ['server', 'servers', 'dell'], a: '<p>We supply HP and Dell servers for applications, files and shared services. <a href="#t-server">See details</a>.</p>', c: ['Data center', 'UPS'] },
+    { id: 't-data-center', k: ['data center', 'datacenter', 'data centre', 'raised floor', 'raised floors', 'structured cabling', 'server room'], a: '<p>We provide data center structured cabling and raised floors for server rooms and data centers. <a href="#t-data-center">See details</a>.</p>', c: ['Network', 'UPS'] },
+    { id: 't-network', k: ['network', 'networking', 'switch', 'router', 'wifi', 'wi fi', 'access point', 'rack', 'cabinet', 'cabinets', 'cable', 'cabling', 'cable tray', 'cable ladder', 'lan'], a: '<p>Our network range covers switches and routers, racks and cabinets, WiFi access points, network cable, and cable trays and ladders. <a href="#t-network">See details</a>.</p>', c: ['UPS', 'Data center'] },
+    { id: 't-ups', k: ['ups', 'power backup', 'power cut', 'battery backup', 'online ups'], a: '<p>We supply Online UPS systems for server rooms, offices and factories. UPS servicing and maintenance is available under ClickMeta Solutions. <a href="#t-ups">See details</a>.</p>', c: ['Annual maintenance', 'Servers'] },
+    { id: 't-cctv', k: ['cctv', 'camera', 'cameras', 'nvr', 'surveillance', 'ip camera'], a: '<p>We supply IP cameras and NVR recorders for offices, shops, factories and warehouses. <a href="#t-cctv">See details</a>.</p>', c: ['Access control', 'Turnstile gates'] },
+    { id: 't-access-control', k: ['access control', 'face id', 'biometric', 'biometrics', 'fingerprint', 'proximity', 'door access', 'door lock'], a: '<p>Our access control range includes Face ID, biometric and proximity devices. <a href="#t-access-control">See details</a>.</p>', c: ['Turnstile gates', 'CCTV'] },
+    { id: 't-turnstile', k: ['turnstile', 'turnstiles', 'gate', 'gates', 'tunstile'], a: '<p>We supply turnstile gates for controlled entry at lobbies, factory gates and campuses. <a href="#t-turnstile">See details</a>.</p>', c: ['Access control', 'CCTV'] },
+    { id: 't-av-conference', k: ['conference', 'conferencing', 'video conference', 'jabra', 'grandstream', 'video call', 'meeting device', 'audio video'], a: '<p>We supply audio and video conferencing from Jabra and GrandStream for meeting rooms and remote teams. <a href="#t-av-conference">See details</a>.</p>', c: ['Interactive display', 'Meeting room booking'] },
+    { id: 't-pa-system', k: ['pa system', 'sound system', 'speaker', 'speakers', 'public address', 'announcement'], a: '<p>We supply PA and sound systems for announcements and background audio. <a href="#t-pa-system">See details</a>.</p>', c: ['PBX', 'Conferencing'] },
+    { id: 't-pbx', k: ['pbx', 'ip pbx', 'telephone', 'phone system', 'ip phone', 'intercom'], a: '<p>We provide an IP PBX server solution for business phone calls across offices and branches. <a href="#t-pbx">See details</a>.</p>', c: ['Conferencing', 'Network'] },
+    { id: 't-interactive-display', k: ['interactive display', 'interactive displays', 'smart board', 'smartboard', 'display', 'touch screen'], a: '<p>We supply interactive displays for meetings, training and presentations. <a href="#t-interactive-display">See details</a>.</p>', c: ['Conferencing', 'Meeting room booking'] },
+
+    // AI automations
+    { id: 'ai', k: ['ai automations', 'ai automation', 'automation', 'automations', 'automate', 'ai', 'artificial intelligence'],
+      a: '<p>ClickMeta Automation covers Industrial AI Automation, Business Process Intelligence and Automation-BPIA, Robotic Process Automation-RPA, Facebook page automation and WhatsApp automation for online shops.</p><p>See <a href="#ai-automations">Products: AI Automations</a> or the <a href="automations.html">Solutions portfolio</a>.</p>', c: ['RPA', 'Facebook page automation', 'WhatsApp automation'] },
+    { id: 'ai-industrial', k: ['industrial', 'factory automation', 'industrial ai', 'manufacturing'], a: '<p>Industrial AI Automation brings AI and automation to industrial operations. <a href="#ai-industrial">See details</a>, or message us with your use case.</p>', h: true },
+    { id: 'ai-bpia', k: ['bpia', 'business process', 'process intelligence', 'business process intelligence'], a: '<p>Business Process Intelligence and Automation-BPIA helps you understand and automate your business processes. <a href="#ai-bpia">See details</a>.</p>', c: ['RPA', 'Request a quote'] },
+    { id: 'ai-rpa', k: ['rpa', 'robotic', 'robotic process', 'software robot', 'bot'], a: '<p>Robotic Process Automation-RPA uses software robots to handle repetitive tasks. <a href="#ai-rpa">See details</a>.</p>', c: ['BPIA', 'Request a quote'] },
+    { id: 'ai-facebook', k: ['facebook page', 'fb page', 'facebook automation', 'f commerce', 'fcommerce', 'online shop', 'online shops', 'facebook shop'], a: '<p>Our Facebook page automation for online shops replies to comments and inbox messages, captures orders into a sheet or system, and books the courier. <a href="#ai-facebook">See details</a>.</p>', c: ['WhatsApp automation', 'Request a quote'] },
+    { id: 'ai-whatsapp', k: ['whatsapp automation', 'whatsapp bot', 'whatsapp sales', 'whatsapp orders'], a: '<p>Our AI Sales Bot takes orders by chat on your website, Messenger and WhatsApp. <a href="#ai-whatsapp">See details</a>.</p>', c: ['Facebook page automation', 'Request a quote'] },
+
+    // Solutions
+    { id: 'solutions', k: ['solutions', 'solution', 'it services', 'it service'],
+      a: '<p>ClickMeta Solutions offers Managed IT Service, IT Help Desk (Remote), Annual Maintenance Contract, Employee Attendance System, Meeting Room Booking System and IT Helpdesk Ticketing System.</p><p>See <a href="#solutions">Products: Solutions</a>.</p>', c: ['Managed IT service', 'Annual maintenance', 'Attendance system'] },
+    { id: 's-managed', k: ['managed it', 'managed service', 'managed services', 'it support', 'remote support', 'managed'], a: '<p>Managed IT Service is day-to-day IT support delivered remotely, together with IT Help Desk (Remote) and an Annual Maintenance Contract. <a href="#s-managed">See details</a>.</p>', c: ['Annual maintenance', 'Request a quote'] },
+    { id: 's-amc', k: ['annual maintenance', 'maintenance', 'amc', 'contract', 'servicing', 'ups servicing', 'infrastructure monitoring', 'monitoring'], a: '<p>The Annual Maintenance Contract covers Rented Scanning and Printing, Infrastructure Management and Monitoring, and UPS Servicing and Maintenance. <a href="#s-managed">See details</a>.</p>', c: ['Managed IT service', 'Request a quote'] },
+    { id: 's-helpdesk', k: ['help desk', 'helpdesk', 'ticket', 'tickets', 'ticketing', 'support desk'], a: '<p>IT Help Desk (Remote) gives your team one place to ask for help, and the IT Helpdesk Ticketing System tracks requests. <a href="#s-helpdesk">See details</a>.</p>', c: ['Managed IT service', 'Request a quote'] },
+    { id: 's-attendance', k: ['attendance', 'employee attendance', 'time attendance', 'staff attendance'], a: '<p>The Employee Attendance System is available under ClickMeta Solutions. <a href="#s-attendance">See details</a>.</p>', c: ['Access control', 'Request a quote'] },
+    { id: 's-meeting', k: ['meeting room', 'room booking', 'meeting room booking', 'booking system', 'book a room'], a: '<p>The Meeting Room Booking System is available under ClickMeta Solutions. <a href="#s-meeting">See details</a>.</p>', c: ['Conferencing', 'Interactive display'] },
+
+    // Services, process, commercial
+    { id: 'services', k: ['services', 'service', 'website', 'websites', 'web app', 'web apps', 'web design', 'web development', 'marketing', 'digital marketing', 'seo', 'brand', 'branding', 'logo', 'design'],
+      a: '<p>Our services are Websites and web apps, AI automation, Digital marketing, and Brand and identity. <a href="#services">See Services</a>.</p>', c: ['How a project runs', 'Request a quote'] },
+    { id: 'process', k: ['process', 'how a project runs', 'steps', 'how does it work', 'how it works', 'workflow', 'approach'],
+      a: '<p>Every project moves through five steps: Discover, Design, Build, Launch and Improve. <a href="#process">See how a project runs</a>.</p>', c: ['Request a quote', 'Contact us'] },
+    { id: 'quote', k: ['quote', 'quotation', 'price', 'prices', 'pricing', 'cost', 'how much', 'budget', 'rate', 'rates', 'estimate', 'proposal'],
+      a: '<p>Prices depend on what you need, so we send a written quotation after you share your requirement. Tell us the products or services, the locations and roughly how many users, and we will reply.</p>', h: true, quote: true },
+    { id: 'portfolio', k: ['portfolio', 'brochure', 'pdf', 'profile', 'company profile', 'case study'],
+      a: '<p>You can browse our portfolios here: <a href="technologies.html">Technologies portfolio</a> and <a href="automations.html">Solutions portfolio</a> (software, AI and automation).</p>', c: ['Our businesses', 'Request a quote'] },
+    { id: 'contact', k: ['contact', 'phone', 'call', 'number', 'email', 'mail', 'reach', 'whatsapp', 'facebook', 'instagram', 'social', 'talk', 'speak'],
+      a: '<p>You can reach us on:</p><ul><li>Phone and WhatsApp: <a href="tel:' + TEL + '">' + PHONE + '</a></li><li>Email: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></li><li><a href="https://www.facebook.com/ClickMetaInnovations/" target="_blank" rel="noopener">Facebook</a> and <a href="https://www.instagram.com/clickmetainnovations" target="_blank" rel="noopener">Instagram</a></li></ul>', h: true },
+    { id: 'location', k: ['address', 'location', 'office', 'where are you', 'visit', 'hours', 'opening hours', 'open', 'time'],
+      a: '<p>I do not have our office address or opening hours here. Message us and the team will share them.</p>', h: true },
+    { id: 'human', k: ['human', 'person', 'agent', 'someone', 'representative', 'team member', 'real person', 'staff', 'help'],
+      a: '<p>Of course. You can reach the team directly:</p>', h: true }
+  ];
+
+  function norm(s) { return ' ' + s.toLowerCase().replace(/[^a-z0-9\u0980-\u09ff ]+/g, ' ').replace(/\s+/g, ' ').trim() + ' '; }
+
+  function score(entry, text, tokens) {
+    var s = 0;
+    entry.k.forEach(function (kw) {
+      if (kw.indexOf(' ') > -1) {
+        if (text.indexOf(' ' + kw + ' ') > -1) { s += 4; } else if (text.indexOf(' ' + kw) > -1) { s += 3; }
+      } else if (tokens.indexOf(kw) > -1) {
+        s += 2;
+      } else if (kw.length >= 4) {
+        for (var i = 0; i < tokens.length; i++) {
+          var t = tokens[i];
+          if (t.length >= 4 && t.indexOf(kw) === 0) { s += 1; break; }
+          if (t.length >= 5 && kw.indexOf(t) === 0) { s += 1; break; }
+        }
+      }
+    });
+    return s;
+  }
+
+  function match(q) {
+    var text = norm(q);
+    var tokens = text.trim().split(' ');
+    var best = null, bestScore = 0;
+    KB.forEach(function (e) {
+      if (e.short && tokens.length > 4) return;
+      var sc = score(e, text, tokens);
+      if (sc > bestScore) { best = e; bestScore = sc; }
+    });
+    return bestScore > 0 ? best : null;
+  }
+
+  function addMsg(kind, html, isText) {
+    var d = document.createElement('div');
+    d.className = 'msg ' + kind;
+    if (isText) { d.textContent = html; } else { d.innerHTML = html; }
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+
+  function setChips(list) {
+    chipsBox.innerHTML = '';
+    (list || []).forEach(function (label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.addEventListener('click', function () { ask(label); });
+      chipsBox.appendChild(b);
+    });
+  }
+
+  function reply(q) {
+    var e = match(q);
+    var html, chips;
+    if (e) {
+      html = e.a;
+      if (e.h) html += handoff(e.quote ? q : '');
+      chips = e.c || DEFAULT_CHIPS;
+    } else {
+      html = '<p>I do not have an answer for that yet. Our team can help you directly:</p>' + handoff(q);
+      chips = DEFAULT_CHIPS;
+    }
+    return { html: html, chips: chips };
+  }
+
+  function ask(q) {
+    q = (q || '').trim();
+    if (!q) return;
+    addMsg('user', q, true);
+    setChips([]);
+    var r = reply(q);
+    var typing = addMsg('bot', '<span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>');
+    setTimeout(function () {
+      typing.innerHTML = r.html;
+      setChips(r.chips);
+      log.scrollTop = log.scrollHeight;
+    }, reduce ? 0 : 450);
+  }
+
+  function openChat() {
+    panel.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+    if (!started) {
+      started = true;
+      addMsg('bot', KB[0].a);
+      setChips(DEFAULT_CHIPS);
+    }
+    setTimeout(function () { input.focus(); }, 30);
+  }
+  function closeChat() {
+    panel.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+    fab.focus();
+  }
+
+  fab.addEventListener('click', openChat);
+  closeBtn.addEventListener('click', closeChat);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value;
+    input.value = '';
+    ask(v);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) closeChat();
+  });
+  // on small screens, close the chat when a page link inside an answer is followed so the section is visible
+  log.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (a && window.innerWidth < 700) { panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+</script>
